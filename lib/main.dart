@@ -1,72 +1,110 @@
 import 'package:flutter/material.dart';
+import 'package:orduna_pena_a02/widgets/btn_counter.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CounterScreen(),
+      home: const CounterScreen(),
     );
   }
 }
 
-class CounterScreen extends StatelessWidget {
+class CounterScreen extends StatefulWidget {
+  const CounterScreen({Key? key}) : super(key: key);
+
+  @override
+  _CounterScreenState createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  int contador = 0;
+
+  void incrementCount() {
+    setState(() {
+      contador++;
+      debugPrint("Contador: $contador");
+    });
+  }
+
+  void decrementCount() {
+    setState(() {
+      if (contador > 0) {
+        contador--;
+        debugPrint("Contador: $contador");
+      }
+    });
+  }
+
+  void resetCount() {
+    setState(() {
+      contador = 0;
+      debugPrint("Contador: $contador");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF2F2F2F),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
+      backgroundColor: const Color.fromARGB(255, 53, 53, 52),
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              'CONTADOR',
+              "CONTADOR",
               style: TextStyle(
                 fontFamily: 'Poppins',
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
-                fontSize: 55,
-              ),
+                color: const Color.fromARGB(255, 255, 255, 255),
+                fontSize: 60.0,
+                fontWeight: FontWeight.w700,
+              ), // Usar el estilo definido en el theme
             ),
             Text(
-              '0',
+              "$contador",
               style: TextStyle(
                 fontFamily: 'Poppins',
+                color: const Color.fromARGB(255, 255, 255, 255),
+                fontSize: 200.0,
                 fontWeight: FontWeight.w200,
-                color: Colors.white,
-                fontSize: 200,
               ),
             ),
-            SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CounterButton(label: '+'),
-                SizedBox(width: 25),
-                CounterButton(label: 'RESET'),
-                SizedBox(width: 25),
-                CounterButton(label: '-'),
+                BtnCounter(
+                  text: '+',
+                  fontsize: 25.0,
+                  fontWeight: FontWeight.w800,
+                  onPressed: incrementCount,
+                ),
+                BtnCounter(
+                  text: 'RESET',
+                  fontsize: 18.0,
+                  fontWeight: FontWeight.w600,
+                  onPressed: resetCount,
+                ),
+                BtnCounter(
+                  text: '-',
+                  fontsize: 25.0,
+                  fontWeight: FontWeight.w800,
+                  onPressed: decrementCount,
+                ),
               ],
             ),
-            // Usamos Expanded para permitir que el espacio disponible se distribuya entre los elementos
-            Expanded(
-              child: SizedBox.shrink(),
-            ),
-            Padding(
-              padding: EdgeInsets.all(50),
-              child: Text(
+            Text(
                 'By emilio_orduna',
                 style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w400,
                 color: const Color.fromARGB(255, 123, 123, 123),
                 fontSize: 20,
-              ),
               ),
             ),
           ],
@@ -75,34 +113,3 @@ class CounterScreen extends StatelessWidget {
     );
   }
 }
-
-class CounterButton extends StatelessWidget {
-  final String label;
-
-  CounterButton({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        // Implementar la lógica según el botón presionado
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFF1B1B1B),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 45, vertical: 15), // Ajusta el padding
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          fontWeight: label == 'RESET' ? FontWeight.w500 : FontWeight.w700,
-          fontSize: label == 'RESET' ? 25 : 28, // Ajusta el tamaño de la fuente
-        ),
-      ),
-    );
-  }
-}
-

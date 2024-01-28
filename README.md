@@ -82,15 +82,44 @@ Debemos recrear la pantalla de un contador desde un ejemplo en [Figma](https://w
         ),
         );
     }
-    }
+    }```
 
-## Ejecutar la Aplicación
 
-- Asegúrate de tener Flutter y Dart instalados. Navega al directorio del proyecto en tu terminal y ejecuta:
 
-    ```bash 
-        flutter run 
-- Esto iniciará la aplicación en tu dispositivo o emulador.
+# Ejercicio 2
+
+## Enunciado
+
+- Deberás de crear una clase en flutter que sea una plantilla de los botones, en la que le pases el argumento de texto y sustituirlo por los 3 botones que tenemos → 2 puntos
+- Darle funcionalidad a los botones, cambios solo por consola → 2 puntos
+- Cambios por pantalla → 4 puntos.
+- README → 2 puntos.
+
+## Pantalla
+
+![Pantalla 2](https://i.imgur.com/xXCvo70.png)
+![Pantalla 3](https://i.imgur.com/0dkVAkp.png)
+
+## Componentes
+
+### CounterScreen
+El widget CounterScreen es un StatefulWidget que maneja el estado del contador y muestra la interfaz de usuario. Utiliza un Scaffold como su estructura principal y contiene un texto para mostrar el valor actual del contador y tres botones flotantes BtnCounter para incrementar, decrementar y resetear el contador.
+
+### BtnCounter
+El widget BtnCounter es un StatefulWidget que representa un botón flotante de tipo FloatingActionButton personalizado. Toma como parámetros el texto que se mostrará en el botón, el tamaño de la fuente, el peso de la fuente y una función de devolución de llamada que se ejecutará cuando se presione el botón.
+
+El widget BtnCounter es un botón flotante personalizado que se utiliza para controlar las acciones del contador (incrementar, decrementar, resetear). Aquí está la explicación de las partes clave del código:
+
+- **Constructor**: Toma cuatro parámetros:
+  - `text`: El texto que se mostrará en el botón.
+  - `fontsize`: El tamaño de la fuente del texto.
+  - `fontWeight`: El peso de la fuente del texto.
+  - `onPressed`: Una función de devolución de llamada que se ejecutará cuando se presione el botón.
+
+- **build()**: Retorna un SizedBox que envuelve un FloatingActionButton. El botón tiene un color de fondo negro, un borde redondeado y un tamaño fijo. El texto del botón se establece según el parámetro `text`, el tamaño de la fuente y el peso de la fuente se toman de los parámetros `fontsize` y `fontWeight`, respectivamente. La función de devolución de llamada `onPressed` se asigna al evento `onPressed` del botón.
+
+Este widget es un StatefulWidget porque su estado puede cambiar (por ejemplo, al presionar el botón), por lo que tiene su propia clase de estado `_BtnCounterState`. En este caso particular, el estado no cambia, pero se podría implementar algún tipo de animación o lógica adicional en el futuro.
+
 
 ### Recursos utilizados
 - [Documentación Flutter](https://docs.flutter.dev/)
